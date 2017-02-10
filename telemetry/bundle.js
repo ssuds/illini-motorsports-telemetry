@@ -1,12 +1,12 @@
 define([
     'openmct',
     './src/IMTelemetryServerAdapter',
-    './src/IMTelemetryInitializer',
+    './src/IMTelemetryCompositionProvider',
     './src/IMTelemetryModelProvider'
 ], function (
     openmct,
     IMTelemetryServerAdapter,
-    IMTelemetryInitializer,
+    IMTelemetryCompositionProvider,
     IMTelemetryModelProvider
 ) {
     openmct.legacyRegistry.register("illini-motorsports-telemetry/telemetry", {
@@ -71,12 +71,6 @@ define([
                     "value": "ws://localhost:8081"
                 }
             ],
-            "runs": [
-                {
-                    "implementation": IMTelemetryInitializer,
-                    "depends": [ "im.adapter", "objectService" ]
-                }
-            ],
             "components": [
                 {
                     "provides": "modelService",
@@ -93,4 +87,5 @@ define([
             ]
         }
     });
+    openmct.composition.addProvider(new IMTelemetryCompositionProvider(openmct));
 });
