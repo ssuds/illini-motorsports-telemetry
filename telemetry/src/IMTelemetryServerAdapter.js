@@ -48,6 +48,9 @@ define(
                 subscribe: function (id) {
                     ws.send("subscribe " + id);
                 },
+                unsubscribe: function (id) {
+                    ws.send("unsubscribe " + id);
+                },
                 listen: function (callback) {
                     listeners.push(callback);
                 }
